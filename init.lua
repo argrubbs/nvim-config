@@ -10,11 +10,15 @@ end
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
-
   use 'voldikss/vim-floaterm' -- floating terminal plugin
   use 'tpope/vim-surround'
+  use 'mg979/vim-visual-multi'
+  use 'mechatroner/rainbow_csv'
   use 'tmsvg/pear-tree'
+  use 'nvim-tree/nvim-web-devicons'
+  use 'nvim-tree/nvim-tree.lua'
   use 'nvim-telescope/telescope-file-browser.nvim'
+  use ("nathom/filetype.nvim")
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -174,6 +178,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- lf.nvim keymapping
 
 vim.keymap.set('n', '<leader>fb', require("telescope").extensions.file_browser.file_browser, { noremap = true })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>')
+vim.keymap.set('n', '<leader>t>', '<cmd>tabnext<cr>')
+vim.keymap.set('n', '<leader>t<', '<cmd>tabprevious<cr>')
 
 -- floaterm mapping
 vim.keymap.set({'n', 'v'}, '<leader>tr', '<cmd>FloatermToggle<CR>')
@@ -397,13 +404,22 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
+},
+
+require('filetype').setup({
+  overrides = {
+    complex = {
+      ['*.lua'] = 'lua',
+      ['*.nix'] = 'nix',
+      ['*.toml'] = 'toml',
+      ['*.yaml'] = 'yaml',
+      ['*.yml'] = 'yaml',
+      ['main.yml'] = 'yaml.ansible',
+      ['*.tf'] = 'terraform',
+      ['*.tfvars'] = 'tfvars'
     },
-  },
-}
+  }
+})
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -477,8 +493,4 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
 
