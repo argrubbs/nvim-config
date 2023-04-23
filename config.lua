@@ -97,10 +97,11 @@ end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
-  {
-    "pearofducks/ansible-vim"
-  },
+  { "pearofducks/ansible-vim" },
   { "github/copilot.vim" },
+  { "tpope/vim-speeddating" },
+  { "tpope/vim-surround" }
+
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
