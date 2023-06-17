@@ -1,0 +1,12 @@
+[Unit]
+Description=Kanshi Display Manager
+Documentation=man:kanshi(1)
+PartOf=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kanshi -c /home/adam/.config/kanshi/kanshi.conf 
+Restart=always
+
+[Install]
+WantedBy=sway-session.target

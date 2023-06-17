@@ -1,0 +1,9 @@
+gtk_dark=true
+allow_images=true
+term=kitty
+key_expand=Right
+key_up=Up,Control_L-k
+key_down=Down,Control_L,j
+key_right=Right
+key_left=Control_L-h
+key_exit=Escape,Control_L-bracketleft
