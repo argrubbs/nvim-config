@@ -6,6 +6,7 @@
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.relativenumber = true
+vim.opt.termguicolors = true
 
 -- general
 lvim.log.level = "info"
@@ -21,9 +22,13 @@ lvim.format_on_save = {
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<Leader><Leader>i"] = "<cmd>IconPickerNormal<cr>"
+lvim.keys.normal_mode["<Leader><Leader>y"] = "<cmd>IconPickerYank<cr>"
+-- lvim.keys.insert_mode["<C-i>"] = "<cmd>IconPickerInsert<cr>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+--
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
 
@@ -173,6 +178,74 @@ lvim.plugins = {
       }
     end,
   },
+  { "dracula/vim" },
+  { "theRealCarneiro/hyprland-vim-syntax" },
+  { "stevearc/dressing.nvim" },
+  {
+    "ziontee113/icon-picker.nvim",
+    config = function()
+      require("icon-picker").setup({
+        disable_legacy_commands = true
+      })
+    end,
+  },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    config = function()
+      require("nvim-highlight-colors").setup {
+        render = 'background',
+        enable_named_colors = true,
+        enable_tailwind = false
+      }
+    end,
+  },
+  { "tpope/vim-fugitive" },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup {
+        signs = {
+          add = { text = '|' },
+          change = { text = '|' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked = { text = '┆' },
+        },
+        signcolumn = true,
+        numhl = false,
+        linehl = false,
+        word_diff = false,
+        watch_gitdir = {
+          follow_files = true
+        },
+        attach_to_untracked = true,
+        current_line_blame = true,
+        current_line_blame_opts = {
+          virt_text = true,
+          virt_text_pos = 'eol',
+          delay = 200,
+          ignore_whitespace = false,
+        },
+        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil,
+        max_file_length = 40000,
+        preview_config = {
+          border = 'single',
+          style = 'minimal',
+          relative = 'cursor',
+          row = 0,
+          col = 1
+        },
+        yadm = {
+          enable = false
+        },
+      }
+    end,
+  },
+  { 'takelley1/ansible-doc.vim' },
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
